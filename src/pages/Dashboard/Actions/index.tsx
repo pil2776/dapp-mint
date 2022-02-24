@@ -24,12 +24,13 @@ import {
   Balance,
   ChainID,
   TransactionVersion,
-  U8Value
+  U8Value,
+  Egld
 } from '@elrondnetwork/erdjs';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { contractAddress, servers } from 'config';
+import { contractAddress, servers, creator } from 'config';
 import axios from 'axios';
 
 import Button from 'react-bootstrap/Button';
@@ -37,6 +38,7 @@ import Card from 'react-bootstrap/Card'
 import NftPlaceElrond from './../../../assets/img/Elrond-NFT-space.jpg';
 import PersonList from 'api/PersonList';
 import NftList from 'api/NftList';
+import NftCollection from 'api/NftCollection';
 
 const Actions = () => {
   const account = useGetAccountInfo();
@@ -45,6 +47,8 @@ const Actions = () => {
   const { address } = account;
 
   const [secondsLeft, setSecondsLeft] = React.useState<number>();
+  const [leftToMint, setleftToMint] = React.useState<number>();
+ 
   const [hasPing, setHasPing] = React.useState<boolean>();
   const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
       string | null
@@ -83,6 +87,7 @@ const Actions = () => {
       .queryContract(query)
       .then(({ returnData }) => {
         const [encoded] = returnData;
+        console.log("getTimeToPong");
         switch (encoded) {
           case undefined:
             setHasPing(true);
@@ -104,6 +109,32 @@ const Actions = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
+
+
+  React.useEffect(() => {
+    console.log('getTotalTokensLeft');
+
+    const query = new Query({
+      address: new Address(contractAddress),
+      func: new ContractFunction('getTotalTokensLeft')
+      /*args: [BytesValue.fromHex('0x01')]*/
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {       
+        const [encoded] = returnData;
+        let decoded = Buffer.from(encoded, 'base64').toString('hex');
+        setleftToMint(parseInt(decoded));
+        console.log(decoded)        
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });      
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  } ,[]);
+
+
 
   const { sendTransactions } = transactionServices;
 
@@ -197,37 +228,21 @@ const Actions = () => {
 
   const sendDebugQuery = async () => {
   
-    console.log('getDurationTimestamp');
+    console.log('getTotalTokensLeft');
 
     const query = new Query({
       address: new Address(contractAddress),
-      func: new ContractFunction('getDurationTimestamp')
+      func: new ContractFunction('getTotalTokensLeft')
       /*args: [BytesValue.fromHex('0x01')]*/
     });
     const proxy = new ProxyProvider(network.apiAddress);
     proxy
       .queryContract(query)
-      .then(({ returnData }) => {
+      .then(({ returnData }) => {       
         const [encoded] = returnData;
-        console.log('return data getDurationTimestamp : ' + returnData)
-        console.log('return data getDurationTimestamp [encoded] : ' + encoded)
-        console.log('return data getDurationTimestamp parseint[encoded] : ' + parseInt(encoded))
-        
-        /*switch (encoded) {
-          case undefined:
-            setHasPing(true);
-            break;
-          case '':
-            setSecondsLeft(0);
-            setHasPing(false);
-            break;
-          default: {
-            const decoded = Buffer.from(encoded, 'base64').toString('hex');
-            setSecondsLeft(parseInt(decoded, 16));
-            setHasPing(false);
-            break;
-          }
-        }*/
+        let decoded = Buffer.from(encoded, 'base64').toString('hex');
+        setleftToMint(parseInt(decoded));
+        console.log(decoded)        
       })
       .catch((err) => {
         console.error('Unable to call VM query', err);
@@ -243,107 +258,15 @@ const Actions = () => {
     .seconds(secondsLeft || 0)
     .format('mm:ss');
 
-
-
-
-    
-    const ComponentPil = (props : any) => {
-      const [loading, setLoading] = React.useState(false);
-      const [data, setData] = React.useState();
-      const [error, setError] = React.useState();
-    
-      React.useEffect(() => {
-        (async () => {
-          setLoading(true);
-          try {
-
-            const res = await fetch(`https://petstore.swagger.io/v2/pet/${props.id}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              credentials: 'include',
-            });
-            const data = await res.json();
-            
-
-            setData(data);
-            } catch (err) {
-              //setError(err);
-            } 
-            setLoading(false);
-        })();
-      }, [props.id]);
-    
-      return (
-            <div className="App">
-              {/* <img src={data.image} alt={data.name} />*/}
-              <h3>{data}</h3> 
-              {/* <ul>
-                <li>
-                  <strong>id:</strong> {data.id}
-                </li>
-                <li>
-                  <strong>status:</strong> {data.status}
-                </li>
-              </ul> */}
-            </div>
-          );
-    };
-
-
-
-
-    // const PetDetails = (props : any) => {
-    //   // useOperation is called right away as an effect
-    //   // const { loading, error, data } = useOperation('getPetById', props.id);
-    //   const { loading, error, data } = useOperation('listPets');
-    //   // useOperationMethod returns a method you can call
-    //   const [deletePetById, deleteState] = useOperationMethod('deletePetById');
-    
-    //   if (loading || !data) {
-    //     return <div>Loading...</div>;
-    //   }
-    
-    //   if (error) {
-    //     return <div>Error: {error}</div>;
-    //   }
-    
-    //   return (
-    //     <div className="App">
-    //       <img src={data.image} alt={data.name} />
-    //       <h3>{data.collection}</h3>
-    //       <ul>
-    //         <li>
-    //           <strong>id:</strong> {data.id}
-    //         </li>
-    //         <li>
-    //           <strong>status:</strong> {data.status}
-    //         </li>
-    //       </ul>
-    //       <button onClick={() => deletePetById(data.id)} disabled={deleteState.loading}>
-    //         Delete
-    //       </button>
-    //       {deleteState.response && <p>Success!</p>}
-    //       {deleteState.error && <p>Error deleting pet: {deleteState.error}</p>}
-    //     </div>
-    //   );
-    // };
-
   return (
     <>
-     <input type="number" min={1} max={10}></input>       
-     <button > Mint </button>
-    
-      {/* <ComponentPil id={1} /> */}
-      <NftList server={servers}></NftList>
-      {/* <PersonList ></PersonList>
-       */}
-
-     <Card style={{ width: '18rem' }}>
-     
-      <Card.Header>Collection : </Card.Header>
-        
+     {/* <input type="number" min={1} max={10}></input>       
+     <button  onClick={sendDebugQuery} > Mint </button>    
+     */}
+     <Card style={{ width: '20rem' }}>     
+      <Card.Header className="custom-card-header" >         
+        <NftCollection server={servers} creator={creator}> </NftCollection>
+      </Card.Header>        
       <Card.Img variant="top" src={NftPlaceElrond}/>
       <Card.Body>
         <Card.Text>
@@ -353,12 +276,8 @@ const Actions = () => {
      
         {/* <Button variant="primary">Go somewhere</Button> */}
       </Card.Body>
-    </Card>
-     
-     
-     <div className='d-flex mt-4 justify-content-center'>       
-            
-      
+    </Card>          
+     <div className='d-flex mt-4 justify-content-center'> 
       {hasPing !== undefined && (
         <>
           {hasPing && !hasPendingTransactions ? (

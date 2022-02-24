@@ -7,3 +7,4 @@ export const dAppName = 'Mint Dapp';
 
 //export const servers = 'https://api.elrond.com/';
 export const servers = 'https://devnet-api.elrond.com/';
+export const creator = 'erd1qqqqqqqqqqqqqpgqpfpzdydn6f4hcya8rzqvuecpgdyezg5snepsthwevy';
