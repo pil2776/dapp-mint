@@ -54,14 +54,19 @@ const TopInfo = () => {
 
 
   return (
-    <div className='text-dark text-left' data-testid='topInfo'>
+    <div className='custom-info text-center' data-testid='topInfo'>
       <div className='mb-4'>
-        <span className='opacity-6 mr-1'>Contract address:</span>
-        <span data-testid='contractAddress'> {contractAddress}</span>
+        <span className='opacity-9 mr-1'>Contract address:</span>
+        {/* <a href = {'https://devnet-explorer.elrond.com/accounts/'+{contractAddress}} >
+         */}
+        <a href = {'https://devnet-explorer.elrond.com/accounts/' + contractAddress} >
+        
+          <span data-testid='contractAddress'> {contractAddress}</span>
+        </a>
       </div>
       <div>
       <div className='mb-4'>
-        <span className='opacity-6 mr-1'>Your Account balance:</span>
+        <span className='opacity-9 mr-1'>Your Account balance:</span>
         <span>
           <DappUI.Denominate value={account.balance} data-testid='balance' />
         </span>
@@ -69,7 +74,7 @@ const TopInfo = () => {
       </div>
       <div>
       <div className='mb-4'>
-        <span className='opacity-6 mr-1'>Left to mint : </span>
+        <span className='opacity-9 mr-1'>Left to mint : </span>
         <span data-testid='leftToMint'> {leftToMint} / 10</span>     
       </div>
       </div>      

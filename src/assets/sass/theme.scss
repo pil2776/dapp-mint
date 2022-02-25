@@ -132,12 +132,67 @@ html {
     }
   }
 }
+/* Customs */
+a:link , a:hover{
+  color: rgba(29,49,100,1);
+}
+.custom-info{
+  padding-top: 2em;
+  color: rgba(29,49,100,0.9);
 
+}
+
+.custom-test, #test{
+  padding-bottom: 50%!important;
+ 
+
+}
 .custom-card-header {
   padding-left: 0em;
   padding-right: 0.5em;
   padding-bottom: 0;
+  color: white;
+  font-weight: bold;
+  // background-color: rgba(29, 49, 100,0.9);
+  // border-radius: 0.70rem;
 }
+
+.custom-bt-color {
+  //background-color: rgba(29,49,100,0.9);
+  width: 100%;
+}
+.custom-nav-bt-color {
+  background-color: rgba(29,49,100,0.9);
+
+}
+
+
+
+.custom-card-color {
+  border: 2px solid rgba(29,49,100, 0.5);
+  border-radius: 0.70rem;
+  background-color: rgb(29, 49, 100);
+  -webkit-box-shadow: 0 0 10px 5px #828282;
+  -moz-box-shadow: 0 0 10px 5px #828282;
+  box-shadow: 0 0 10px 5px #828282;
+ 
+}
+.custom-card-img-top {
+  padding-top: 2px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px; 
+}
+
+.custom-img-show {
+  width: 50%;
+  height: auto;
+  -webkit-box-shadow: 0 0 10px 5px #828282;
+  -moz-box-shadow: 0 0 10px 5px #828282;
+  box-shadow: 0 0 10px 5px #828282;
+}
+
+
 
 /* Actions
 -------------------------------------------------- */

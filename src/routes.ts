@@ -1,3 +1,4 @@
+import { UnlockPage } from '@elrondnetwork/dapp-core/build/UI/pages';
 import { dAppName } from 'config';
 import withPageTitle from './components/PageTitle';
 import Dashboard from './pages/Dashboard';
@@ -30,6 +31,12 @@ const routes: Array<any> = [
     title: 'Transaction',
     component: Transaction
   }
+  // ,
+  // {
+  //   path: routeNames.unlock,
+  //   title: 'Unlock',
+  //   component: UnlockPage
+  // }
 ];
 
 const mappedRoutes = routes.map((route) => {

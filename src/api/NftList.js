@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { contractAddress, servers, creator } from 'config';
 
 class NftList extends React.Component {
   state = {
@@ -8,9 +9,9 @@ class NftList extends React.Component {
 
   componentDidMount() {
 
-    const server = this.props.server;
+    
 //https://devnet-api.elrond.com/collections?size=1&creator=erd1qqqqqqqqqqqqqpgqpfpzdydn6f4hcya8rzqvuecpgdyezg5snepsthwevy
-    axios.get(server+"nfts")
+    axios.get(servers+"nfts")
     .then(res => {
       const nfts = res.data;
       this.setState({ nfts });

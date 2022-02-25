@@ -30,15 +30,18 @@ import {
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { contractAddress, servers, creator } from 'config';
+import { contractAddress} from 'config';
 import axios from 'axios';
+
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
+import { Container, Row, Col } from 'react-bootstrap'
 import NftPlaceElrond from './../../../assets/img/Elrond-NFT-space.jpg';
 import PersonList from 'api/PersonList';
 import NftList from 'api/NftList';
 import NftCollection from 'api/NftCollection';
+import nftOnMarket from './../../../assets/img/nft-gif.gif';
 
 const Actions = () => {
   const account = useGetAccountInfo();
@@ -212,9 +215,9 @@ const Actions = () => {
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: transaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing Pong transaction',
-        errorMessage: 'An error has occured during Pong',
-        successMessage: 'Pong transaction successful'
+        processingMessage: 'Processing Mint transaction',
+        errorMessage: 'An error has occured during Mint',
+        successMessage: 'Mint transaction successful'
       },
       redirectAfterSign: false/*,
       sendTransaction P*/
@@ -260,24 +263,38 @@ const Actions = () => {
 
   return (
     <>
+    <Container>
+    <Row>
+      <Col>  
+        <Card className="custom-card-color" style={{ width: '20rem' }}>     
+          <Card.Header className="custom-card-header" >         
+            <NftCollection > </NftCollection>
+          </Card.Header>        
+          <Card.Img className="custom-card-img-top" custom-variant="top" src={NftPlaceElrond}/>
+          <Card.Body>
+            <Card.Text style={{color: "white"}}>
+              Click on the following button to mint one or several NFTs using our Smart Contract.
+            </Card.Text>
+            <div className="d-grid gap-2">
+              <Button className="custom-bt-color" variant="light"  onClick={sendMintTransaction}>Buy (1 egld)</Button>{' '}
+            </div>
+            {/*  <Button variant="primary">Go somewhere</Button> */}
+          </Card.Body>
+        </Card> 
+      </Col>
+      <Col><img className="custom-img-show" src={nftOnMarket} alt="loading..." /></Col>
+    </Row>
+    
+    
      {/* <input type="number" min={1} max={10}></input>       
      <button  onClick={sendDebugQuery} > Mint </button>    
      */}
-     <Card style={{ width: '20rem' }}>     
-      <Card.Header className="custom-card-header" >         
-        <NftCollection server={servers} creator={creator}> </NftCollection>
-      </Card.Header>        
-      <Card.Img variant="top" src={NftPlaceElrond}/>
-      <Card.Body>
-        <Card.Text>
-          Click on the following button to mint one or several NFTs using our Smart Contract.
-        </Card.Text>
-        <Button variant="dark" size="lg" onClick={sendMintTransaction}>Buy</Button>{' '}
-     
-        {/* <Button variant="primary">Go somewhere</Button> */}
-      </Card.Body>
-    </Card>          
-     <div className='d-flex mt-4 justify-content-center'> 
+
+  
+ 
+  </Container>
+    
+     {/* <div className='d-flex mt-4 justify-content-center'> 
       {hasPing !== undefined && (
         <>
           {hasPing && !hasPendingTransactions ? (
@@ -289,11 +306,7 @@ const Actions = () => {
                 Ping
               </a>
               
-            </div>
-            
-            
-            
-
+            </div>       
           ) 
             : (
             <>
@@ -331,8 +344,8 @@ const Actions = () => {
         </>
       )     
       }
-    </div>
-    </>
+    </div>*/}
+    </> 
    
   );
 };

@@ -34,7 +34,7 @@ const Navbar = () => {
               </span>              
               
               {/* <Button variant="light">Light</Button>  */}
-              <Button variant="dark" onClick={handleLogout}>Close</Button>{' '}
+              <Button className="custom-nav-bt-color" variant="dark" onClick={handleLogout}>Close</Button>{' '}
               {/* <button className='btn btn-link' onClick={handleLogout}>
                 Close
               </button> */}
