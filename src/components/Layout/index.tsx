@@ -28,8 +28,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    // <div className='d-flex flex-column flex-fill wrapper' style={{backgroundImage: NftPlaceElrond}} >
-     <div style={ sectionStyle } >
+    <>
+  
+    <div className='d-flex flex-column flex-fill wrapper' >
+     
+      <div style={ sectionStyle } >  
+
       <Navbar />
       <main className='d-flex flex-fill flex-grow-1'>
         <AuthenticatedRoutesWrapper
@@ -39,7 +43,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </AuthenticatedRoutesWrapper>
       </main>
       <Footer />
+     
+     </div> 
+
     </div>
+    </>
+    
   );
 };
 

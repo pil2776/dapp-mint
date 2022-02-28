@@ -6,6 +6,7 @@ import PageNotFound from 'pages/PageNotFound';
 import { routeNames } from 'routes';
 import routes from 'routes';
 import '@elrondnetwork/dapp-core/build/index.css';
+import { UnlockRoute  } from 'pages/UnlockPage';
 
 const environment = 'devnet';
 
@@ -31,7 +32,9 @@ const App = () => {
           <Routes>
             <Route
               path={routeNames.unlock}
-              element={<UnlockPage loginRoute={routeNames.dashboard} />}
+              element={
+                <UnlockRoute //loginRoute={routeNames.dashboard} />}
+                />}
             />
             {routes.map((route: any, index: number) => (
               <Route

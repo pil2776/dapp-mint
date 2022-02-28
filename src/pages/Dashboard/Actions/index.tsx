@@ -263,9 +263,7 @@ const Actions = () => {
 
   return (
     <>
-    <Container>
-    <Row>
-      <Col>  
+   <div className="d-flex justify-content-center">
         <Card className="custom-card-color" style={{ width: '20rem' }}>     
           <Card.Header className="custom-card-header" >         
             <NftCollection > </NftCollection>
@@ -281,9 +279,11 @@ const Actions = () => {
             {/*  <Button variant="primary">Go somewhere</Button> */}
           </Card.Body>
         </Card> 
-      </Col>
-      <Col><img className="custom-img-show" src={nftOnMarket} alt="loading..." /></Col>
-    </Row>
+        </div>
+
+      {/* <Col><img className="custom-img-show" src={nftOnMarket} alt="loading..." /></Col>
+       */}
+   
     
     
      {/* <input type="number" min={1} max={10}></input>       
@@ -292,7 +292,6 @@ const Actions = () => {
 
   
  
-  </Container>
     
      {/* <div className='d-flex mt-4 justify-content-center'> 
       {hasPing !== undefined && (

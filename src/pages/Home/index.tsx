@@ -21,10 +21,10 @@ const Home = () => {
 
               <Link
                 to={routeNames.unlock}
-                className='btn btn-primary mt-3 text-white'
+                className='custom-btn btn  mt-3 text-white'
                 data-testid='loginBtn'
               >
-                Login1
+                Login
               </Link>
             </div>
           </div>

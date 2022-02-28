@@ -63,6 +63,16 @@ html {
   height: 25px;
 }
 
+.pilz-logo {
+  width: 85px;
+  height: 25px;
+}
+
+.custom-navbar{
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+  background-color : hsla(0,0%,100%,.05)
+}
+
 .dapp-name {
   line-height: 1;
   border-left: 1px solid $gray-400;
@@ -141,8 +151,14 @@ a:link , a:hover{
   color: rgba(29,49,100,0.9);
 
 }
+.custom-logo-img{
+  width:10%;
+  height:10%;
 
-.custom-test, #test{
+}
+
+
+.custom-test{
   padding-bottom: 50%!important;
  
 
@@ -162,10 +178,27 @@ a:link , a:hover{
   width: 100%;
 }
 .custom-nav-bt-color {
-  background-color: rgba(29,49,100,0.9);
-
+  // background-color: rgba(29,49,100,0.9);
+  color: rgba(29,49,100,0.9);
 }
 
+.custom-btn{
+  // background-color: rgba(29,49,100,0.9);
+  background-color: rgba(29,49,100,0.9);
+}
+
+.custom-btn:hover{
+  // background-color: rgba(29,49,100,0.9);
+  background-color:rgba(26,123,178,0.9);
+      transition: 0.7s;
+}
+
+.custom-nav-wallet {
+  // background-color: rgba(29,49,100,0.9);
+  //color: rgba(29,49,100,0.9);
+  padding: 0px 10px ;
+  
+}
 
 
 .custom-card-color {
