@@ -6,7 +6,7 @@ import { routeNames } from 'routes';
 const Home = () => {
   return (
     <div className='custom-test d-flex flex-fill align-items-center container'>
-      <div className='row w-100'>
+      <div className='row w-100 pt-3'>
         <div className='col-12 col-md-8 col-lg-5 mx-auto'>
           <div className='card shadow-sm rounded p-4 border-0'>
             <div className='card-body text-center'>
@@ -16,7 +16,7 @@ const Home = () => {
 
               <p className='mb-3'>
                 This is a mint dapp sample.
-                <br /> Login using your Elrond wallet.
+                <br /> Login using your Elrond wallet (Devnet).
               </p>
 
               <Link

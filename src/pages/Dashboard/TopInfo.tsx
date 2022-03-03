@@ -4,24 +4,9 @@ import { useGetAccountInfo, DappUI, useGetNetworkConfig } from '@elrondnetwork/d
 import { contractAddress } from 'config';
 import {
   Address,
-  AddressValue,
-  Type,
-  TypedValue,
-  BooleanValue,
-  BytesValue,
   ContractFunction,
   ProxyProvider,
-  Query,
-  BytesType,
-  Transaction,
-  GasLimit,
-  GasPrice,  
-  TransactionPayload,
-  Balance,
-  ChainID,
-  TransactionVersion,
-  U8Value,
-  Egld
+  Query,  
 } from '@elrondnetwork/erdjs';
 
 const TopInfo = () => {
@@ -29,9 +14,7 @@ const TopInfo = () => {
   const { network } = useGetNetworkConfig();
   const [leftToMint, setleftToMint] = React.useState<number>();
  
-  React.useEffect(() => {
-    console.log('getTotalTokensLeft');
-
+  React.useEffect(() => {  
     const query = new Query({
       address: new Address(contractAddress),
       func: new ContractFunction('getTotalTokensLeft')
@@ -43,8 +26,8 @@ const TopInfo = () => {
       .then(({ returnData }) => {       
         const [encoded] = returnData;
         let decoded = Buffer.from(encoded, 'base64').toString('hex');
-        setleftToMint(parseInt(decoded));
-        console.log(decoded)        
+     
+        setleftToMint(Number("0x"+decoded));
       })
       .catch((err) => {
         console.error('Unable to call VM query', err);
@@ -52,15 +35,11 @@ const TopInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   } ,[]);
 
-
   return (
     <div className='custom-info text-center' data-testid='topInfo'>
       <div className='mb-4'>
         <span className='opacity-9 mr-1'>Contract address:</span>
-        {/* <a href = {'https://devnet-explorer.elrond.com/accounts/'+{contractAddress}} >
-         */}
-        <a href = {'https://devnet-explorer.elrond.com/accounts/' + contractAddress} >
-        
+        <a href = {'https://devnet-explorer.elrond.com/accounts/' + contractAddress} >        
           <span data-testid='contractAddress'> {contractAddress}</span>
         </a>
       </div>
@@ -75,7 +54,9 @@ const TopInfo = () => {
       <div>
       <div className='mb-4'>
         <span className='opacity-9 mr-1'>Left to mint : </span>
-        <span data-testid='leftToMint'> {leftToMint} / 10</span>     
+
+        {/*improvement : get the total amount of token in the collection*/}
+        <span data-testid='leftToMint'> {leftToMint} / 50</span>     
       </div>
       </div>      
     </div>
