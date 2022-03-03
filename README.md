@@ -1,8 +1,9 @@
-# @elrondnetwork/dapp-template
-The __Elrond dApp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
+# dapp-mint
+The __dApp Mint__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@elrondnetwork/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for Elrond authentication and TX signing.
+This dApp Mint interact with a Elrond Smart Contract made by Julian Cwirko (https://github.com/juliancwirko/elven-nft-minter-sc)
 
-See [Dapp template](https://dapp-template.elrond.com/) for live demo.
+See [Dapp Mint](https://dapp-template.elrond.com/) for live demo.
 
 ## Requirements
 
@@ -12,6 +13,7 @@ See [Dapp template](https://dapp-template.elrond.com/) for live demo.
 ## Getting Started
 
 The dapp is a client side only project and is built using the [Create React App](https://create-react-app.dev)  scripts.
+This project has been build based on the [__dApp Template__](https://github.com/ElrondNetwork/dapp-template)
 
 ### Instalation and running
 
